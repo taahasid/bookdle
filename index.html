@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bookdle</title>
+  <meta name="description" content="Five of the most popular books of 2025 &amp; 2026 a day. Read the plot, guess the book.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Josefin+Sans:wght@400;600;700&family=Libre+Baskerville:ital@0;1&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs>
+      <symbol id="star" viewBox="-50 -50 100 100">
+        <path d="M0-48 4-4 48 0 4 4 0 48-4 4-48 0-4-4Z"/>
+        <path d="M-30-30 2.5-2.5 30-30 2.5 2.5 30 30-2.5 2.5-30 30-2.5-2.5Z" opacity=".7"/>
+      </symbol>
+    </defs>
+  </svg>
+
+  <div class="deco deco-boomerang" aria-hidden="true"></div>
+  <div class="deco deco-sun" aria-hidden="true"></div>
+  <svg class="deco deco-star s1" aria-hidden="true"><use href="#star"/></svg>
+  <svg class="deco deco-star s2" aria-hidden="true"><use href="#star"/></svg>
+  <svg class="deco deco-star s3" aria-hidden="true"><use href="#star"/></svg>
+
+  <header class="masthead">
+    <button class="icon-btn" id="helpBtn" aria-label="How to play">?</button>
+    <div class="brand">
+      <h1>Book<span>dle</span></h1>
+      <p class="tagline">The Daily Plot · <span id="puzzleNo"></span></p>
+    </div>
+    <button class="icon-btn" id="statsBtn" aria-label="Statistics">
+      <svg viewBox="0 0 24 24" width="18" height="18"><path fill="currentColor" d="M4 20V10h3v10H4Zm6.5 0V4h3v16h-3ZM17 20v-7h3v7h-3Z"/></svg>
+    </button>
+  </header>
+
+  <nav class="shelf" id="shelf" aria-label="Today's books"></nav>
+
+  <main class="card" id="card">
+    <div class="card-head">
+      <span class="badge" id="bookLabel">Book No. 1</span>
+      <span class="tries" id="tries"></span>
+    </div>
+
+    <p class="plot" id="plot"></p>
+
+    <ol class="clues" id="clues"></ol>
+
+    <ul class="guesses" id="guesses"></ul>
+
+    <form class="guess-form" id="guessForm" autocomplete="off">
+      <div class="combo">
+        <input id="guessInput" type="text" placeholder="Type a book title…" aria-label="Your guess"
+               role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="suggestions">
+        <ul class="suggestions" id="suggestions" role="listbox"></ul>
+      </div>
+      <div class="actions">
+        <button type="button" class="btn btn-ghost" id="skipBtn">Skip →</button>
+        <button type="submit" class="btn btn-primary">Guess</button>
+      </div>
+    </form>
+
+    <section class="reveal" id="reveal" hidden>
+      <div class="cover" id="cover"><span class="cover-title"></span><span class="cover-author"></span></div>
+      <div class="reveal-text">
+        <p class="verdict" id="verdict"></p>
+        <h2 id="revealTitle"></h2>
+        <p class="meta" id="revealMeta"></p>
+        <button class="btn btn-primary" id="nextBtn">Next book →</button>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot">New plots every day at midnight · <span id="countdownFoot"></span></footer>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <dialog id="helpDlg" class="modal">
+    <h2>How to Play</h2>
+    <p>Every day there are <b>five</b> of the most popular books of 2025 &amp; 2026. You get the plot. Name the book.</p>
+    <ul class="howto">
+      <li><b>4 tries</b> per book. Each miss (or skip) reveals a clue:</li>
+      <li><span class="chip c-teal">1</span> Genre &amp; year published</li>
+      <li><span class="chip c-mustard">2</span> The main character (or key figure)</li>
+      <li><span class="chip c-orange">3</span> The author</li>
+      <li>Fewer clues used, more points: <b>4, 3, 2, 1</b>. A perfect day is 20.</li>
+    </ul>
+    <button class="btn btn-primary" data-close>Let's read</button>
+  </dialog>
+
+  <dialog id="statsDlg" class="modal">
+    <h2 id="statsHead">Today's Shelf</h2>
+    <div class="today-score" id="todayScore"></div>
+    <div class="grid" id="emojiGrid"></div>
+    <div class="stats" id="statsRow"></div>
+    <h3>Points per day</h3>
+    <div class="dist" id="dist"></div>
+    <div class="modal-foot">
+      <div class="countdown">Next shelf in <b id="countdown"></b></div>
+      <button class="btn btn-primary" id="shareBtn">Share</button>
+    </div>
+    <button class="close-x" data-close aria-label="Close">×</button>
+  </dialog>
+
+  <script src="books.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
